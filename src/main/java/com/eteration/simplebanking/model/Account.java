@@ -9,7 +9,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
 
 import static com.eteration.simplebanking.constant.ApplicationConstant.*;
@@ -53,11 +52,26 @@ public class Account{
         this.updatedDate = LocalDateTime.now();
     }
 
+    protected Account() {
+    }
+
     public Account(String owner, String accountNumber) {
         this.owner = owner;
         this.accountNumber = accountNumber;
+        this.balance = 0.0;
     }
 
-    protected Account() {
+    public void deposit(double credit) {
+        balance += credit;
     }
+
+    public void withdraw(double debit) throws InsufficientBalanceException {
+        if (balance < debit ) {
+            throw new InsufficientBalanceException("Insufficient Balance");
+        }
+        balance -= debit;
+
+    }
+
+
 }
