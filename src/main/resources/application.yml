@@ -1,0 +1,22 @@
+server:
+  port: 8083
+
+spring:
+  main:
+    banner-mode: "off"
+  profiles:
+    active: dev
+  datasource:
+    username: "root"
+    url: "jdbc:postgresql://localhost:5432/simplebanking"
+    password: "root"
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
