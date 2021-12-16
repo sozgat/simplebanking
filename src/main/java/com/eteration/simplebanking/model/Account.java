@@ -10,6 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.eteration.simplebanking.constant.ApplicationConstant.*;
 
@@ -22,7 +24,7 @@ public class Account{
     @Id
     @GeneratedValue(generator = UUID)
     @GenericGenerator(name = UUID, strategy = UUID_STRATEGY)
-    @Column(name = "id", insertable = false, updatable = false)
+    @Column(name = ID_COLUMN_NAME, insertable = false, updatable = false)
     private String id;
 
     @Column(name = OWNER)
@@ -33,6 +35,10 @@ public class Account{
 
     @Column(name = BALANCE)
     private Double balance;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = ID_COLUMN_NAME)
+    private List<Transaction> transactions = new ArrayList<>();
 
     @CreationTimestamp
     @Column(name = CREATE_DATE)
@@ -71,6 +77,14 @@ public class Account{
         }
         balance -= debit;
 
+    }
+
+    public void post(Transaction transaction) throws InsufficientBalanceException {
+        try {
+            transaction.doTransaction(this);
+        } finally {
+            transactions.add(transaction);
+        }
     }
 
 
