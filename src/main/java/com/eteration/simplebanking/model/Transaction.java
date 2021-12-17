@@ -1,6 +1,11 @@
 package com.eteration.simplebanking.model;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -8,6 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import static com.eteration.simplebanking.constant.ApplicationConstant.*;
 
@@ -22,9 +28,8 @@ public abstract class Transaction {
     @Column(name = ID_COLUMN_NAME, insertable = false, updatable = false)
     private String id;
 
-    @CreationTimestamp
     @Column(name = TRANSACTION_DATE)
-    private LocalDateTime date;
+    private Date date;
 
     @Column(name = AMOUNT)
     public double amount;
@@ -35,30 +40,13 @@ public abstract class Transaction {
     @Column(name = APPROVAL_CODE)
     private String approvalCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Account account;
-
-    @UpdateTimestamp
-    @Column(name = UPDATE_DATE)
-    private LocalDateTime updatedDate;
-
     protected Transaction() {
-    }
-
-    @PrePersist
-    public void setDate() {
-        this.date = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void setUpdateDate() {
-        this.updatedDate = LocalDateTime.now();
     }
 
     protected Transaction(double amount) {
         this.id = java.util.UUID.randomUUID().toString();
         this.amount = amount;
-        this.date = LocalDateTime.now();
+        this.date = new Date();
         this.type=this.getClass().getSimpleName();
     }
 

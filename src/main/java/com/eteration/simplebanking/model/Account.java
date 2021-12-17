@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.eteration.simplebanking.constant.ApplicationConstant.*;
@@ -37,34 +38,22 @@ public class Account{
     private Double balance;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = ID_COLUMN_NAME)
-    private List<Transaction> transactions = new ArrayList<>();
+    @JoinColumn(name = "account_id")
+    private List<Transaction> transactions;
 
-    @CreationTimestamp
     @Column(name = CREATE_DATE)
-    private LocalDateTime createDate;
-
-    @UpdateTimestamp
-    @Column(name = UPDATE_DATE)
-    private LocalDateTime updatedDate;
-
-    @PrePersist
-    public void setCreateDate() {
-        this.createDate = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void setUpdateDate() {
-        this.updatedDate = LocalDateTime.now();
-    }
+    private Date createDate;
 
     protected Account() {
     }
 
     public Account(String owner, String accountNumber) {
+        this.id="1";
         this.owner = owner;
         this.accountNumber = accountNumber;
         this.balance = 0.0;
+        this.transactions = new ArrayList<>();
+        this.createDate = new Date();
     }
 
     public void deposit(double credit) {
