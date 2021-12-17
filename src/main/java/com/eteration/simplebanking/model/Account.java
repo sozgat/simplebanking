@@ -3,12 +3,14 @@ package com.eteration.simplebanking.model;
 
 // This class is a place holder you can change the complete implementation
 
+import com.eteration.simplebanking.util.MathOperations;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +37,7 @@ public class Account{
     private String accountNumber;
 
     @Column(name = BALANCE)
-    private Double balance;
+    private BigDecimal balance;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
@@ -51,21 +53,20 @@ public class Account{
         this.id="1";
         this.owner = owner;
         this.accountNumber = accountNumber;
-        this.balance = 0.0;
+        this.balance = BigDecimal.ZERO;
         this.transactions = new ArrayList<>();
         this.createDate = new Date();
     }
 
     public void deposit(double credit) {
-        balance += credit;
+        balance = balance.add(BigDecimal.valueOf(credit));
     }
 
     public void withdraw(double debit) throws InsufficientBalanceException {
-        if (balance < debit ) {
+        if (balance.compareTo(BigDecimal.valueOf(debit)) < 0 ) {
             throw new InsufficientBalanceException("Insufficient Balance");
         }
-        balance -= debit;
-
+        balance = balance.subtract(BigDecimal.valueOf(debit));
     }
 
     public void post(Transaction transaction) throws InsufficientBalanceException {
@@ -74,6 +75,9 @@ public class Account{
         } finally {
             transactions.add(transaction);
         }
+    }
+    public double getBalance() {
+        return balance.doubleValue();
     }
 
 

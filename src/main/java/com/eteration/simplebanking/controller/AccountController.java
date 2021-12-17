@@ -3,6 +3,7 @@ package com.eteration.simplebanking.controller;
 import com.eteration.simplebanking.model.Account;
 import com.eteration.simplebanking.model.DepositTransaction;
 import com.eteration.simplebanking.model.InsufficientBalanceException;
+import com.eteration.simplebanking.model.WithdrawalTransaction;
 import com.eteration.simplebanking.services.AccountService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.eteration.simplebanking.constant.MappingConstant.ACCOUNT_CONTROLLER_PATH;
-import static com.eteration.simplebanking.constant.MappingConstant.ACCOUNT_POST_CREDIT;
+import static com.eteration.simplebanking.constant.MappingConstant.*;
 
 
 @Slf4j
@@ -64,7 +64,23 @@ public class AccountController {
         return new ResponseEntity<TransactionStatus>(transactionStatus, headers, HttpStatus.OK);
 
     }
-    public Object debit() {
-        return null;
+    @PostMapping( ACCOUNT_POST_DEBIT +"/{accountNumber}")
+    public ResponseEntity<TransactionStatus> debit(@PathVariable("accountNumber") String accountNumber,
+                        @RequestBody WithdrawalTransaction transaction) throws InsufficientBalanceException {
+        Account account = accountService.findAccount(accountNumber);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;");
+
+        WithdrawalTransaction withdrawalTransaction = new WithdrawalTransaction(transaction.getAmount());
+
+        account.post(withdrawalTransaction);
+
+        accountService.saveAccount(account);
+
+        TransactionStatus transactionStatus = new TransactionStatus();
+        transactionStatus.setApprovalCode(withdrawalTransaction.getApprovalCode());
+
+        return new ResponseEntity<TransactionStatus>(transactionStatus, headers, HttpStatus.OK);
 	}
 }

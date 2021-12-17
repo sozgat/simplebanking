@@ -2,7 +2,10 @@ package com.eteration.simplebanking.model;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+
 @Data
+@Entity
 public class WithdrawalTransaction extends Transaction{
 
     public WithdrawalTransaction(){

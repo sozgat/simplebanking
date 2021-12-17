@@ -47,7 +47,7 @@ class ControllerTests  {
         verify(service, times(1)).findAccount("17892");
         assertEquals("OK", result.getBody().getStatus());
     }
-/*
+
     @Test
     public void givenId_CreditAndThenDebit_thenReturnJson()
     throws Exception {
@@ -77,7 +77,7 @@ class ControllerTests  {
 
             ResponseEntity<TransactionStatus> result2 = controller.debit( "17892", new WithdrawalTransaction(5000.0));
         });
-    }*/
+    }
 
     @Test
     public void givenId_GetAccount_thenReturnJson()

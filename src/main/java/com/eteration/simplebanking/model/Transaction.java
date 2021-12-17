@@ -48,6 +48,7 @@ public abstract class Transaction {
         this.amount = amount;
         this.date = new Date();
         this.type=this.getClass().getSimpleName();
+        this.approvalCode = java.util.UUID.randomUUID().toString();
     }
 
     public abstract void doTransaction(Account account) throws InsufficientBalanceException;
