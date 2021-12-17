@@ -3,15 +3,11 @@ package com.eteration.simplebanking.model;
 
 // This class is a place holder you can change the complete implementation
 
-import com.eteration.simplebanking.util.MathOperations;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
