@@ -1,7 +1,9 @@
 package com.eteration.simplebanking.model;
 
 
-// This class is a place holder you can change the complete implementation
+import javax.persistence.Entity;
+
+@Entity
 public class WithdrawalTransaction extends Transaction{
 
     public WithdrawalTransaction(){

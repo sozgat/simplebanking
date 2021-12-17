@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BillPaymentTests {
+class BillPaymentTests {
 
     @Test
-    public void testPhoneBillPayment()
+    void testPhoneBillPayment()
             throws Exception {
 
         Account account = new Account("Jim", "12345");

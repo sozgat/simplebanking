@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Data
 public class BillPaymentTransaction extends WithdrawalTransaction {
 
-    public String payee;
+    private String payee;
 
     public BillPaymentTransaction(double amount) {
         super(amount);
