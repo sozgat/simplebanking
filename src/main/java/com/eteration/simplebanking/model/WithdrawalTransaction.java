@@ -9,7 +9,6 @@ public class WithdrawalTransaction extends Transaction{
 
     public WithdrawalTransaction(double withdrawal){
         super(withdrawal);
-        this.setType("WithdrawalTransaction");
     }
 
     @Override

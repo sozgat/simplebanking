@@ -9,7 +9,6 @@ public class DepositTransaction extends Transaction  {
 
     public DepositTransaction(double deposit) {
         super(deposit);
-        this.setType("DepositTransaction");
     }
 
     @Override
