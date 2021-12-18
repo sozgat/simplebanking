@@ -1,5 +1,7 @@
 package com.eteration.simplebanking.constant;
 
+import javax.persistence.DiscriminatorColumn;
+
 public abstract class ApplicationConstant {
     private ApplicationConstant() {
     }
@@ -15,8 +17,8 @@ public abstract class ApplicationConstant {
     public static final String UPDATE_DATE = "update_date";
 
     //Entity Names
-    public static final String ACCOUNT_ENTITY = "Account";
-    public static final String TRANSACTION_ENTITY = "Transaction";
+    public static final String ACCOUNT_ENTITY = "AccountEntity";
+    public static final String TRANSACTION_ENTITY = "TransactionEntity";
 
     // Table names
     public static final String ACCOUNT = TABLE_PREFIX + "account";
@@ -30,8 +32,15 @@ public abstract class ApplicationConstant {
 
     // Column Names for Transaction
     public static final String AMOUNT = "amount";
-    public static final String TRANSACTION_TYPE = "type";
     public static final String APPROVAL_CODE = "approval_code";
+    public static final String TRANSACTION_TYPE = "type";
     public static final String TRANSACTION_DATE = "date";
+
+    //Discriminator Column Name
+    public static final String TRANSACTION_TYPE_DISCRIMINATOR = "type";
+
+    //Discriminator Value Name
+    public static final String DEPOSIT_DISCRIMINATOR_VALUE = "DepositTransaction";
+    public static final String WITHDRAWAL_DISCRIMINATOR_VALUE = "WithdrawalTransaction";
 
 }

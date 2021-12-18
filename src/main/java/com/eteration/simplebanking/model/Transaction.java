@@ -20,6 +20,8 @@ import static com.eteration.simplebanking.constant.ApplicationConstant.*;
 @Data
 @Entity(name = TRANSACTION_ENTITY)
 @Table(name = TRANSACTION)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public abstract class Transaction {
 
     @Id
@@ -34,7 +36,7 @@ public abstract class Transaction {
     @Column(name = AMOUNT)
     public double amount;
 
-    @Column(name = TRANSACTION_TYPE)
+    @Column(name = TRANSACTION_TYPE, insertable = false, updatable = false)
     private String type;
 
     @Column(name = APPROVAL_CODE)

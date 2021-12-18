@@ -19,7 +19,6 @@ public class AccountAPIMapper {
     public static Account toDomain(AccountAPIRequestDTO accountAPIRequestDTO){
         Account account = new Account();
         account.setOwner(accountAPIRequestDTO.getOwner());
-        account.setBalance(accountAPIRequestDTO.getBalance());
         return account;
     }
 }

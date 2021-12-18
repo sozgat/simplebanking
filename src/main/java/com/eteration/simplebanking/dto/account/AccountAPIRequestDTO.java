@@ -13,8 +13,4 @@ public class AccountAPIRequestDTO {
     @NotEmpty(message = "Owner field is mandatory.")
     @JsonProperty(value = "owner")
     private String owner;
-
-    @NotNull(message = "Balance field is mandatory.")
-    @JsonProperty(value = "balance")
-    private BigDecimal balance;
 }

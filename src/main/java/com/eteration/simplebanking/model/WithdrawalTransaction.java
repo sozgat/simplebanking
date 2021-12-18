@@ -2,10 +2,14 @@ package com.eteration.simplebanking.model;
 
 import lombok.Data;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
-@Data
+import static com.eteration.simplebanking.constant.ApplicationConstant.*;
+
 @Entity
+@DiscriminatorValue(value = WITHDRAWAL_DISCRIMINATOR_VALUE)
 public class WithdrawalTransaction extends Transaction{
 
     public WithdrawalTransaction(){

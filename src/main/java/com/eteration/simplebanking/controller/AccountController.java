@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static com.eteration.simplebanking.constant.MappingConstant.*;
@@ -68,6 +69,7 @@ public class AccountController {
         return new ResponseEntity<TransactionStatus>(transactionStatus, headers, HttpStatus.OK);
 
     }
+
     @PostMapping( ACCOUNT_POST_DEBIT +"/{accountNumber}")
     public ResponseEntity<TransactionStatus> debit(@PathVariable("accountNumber") String accountNumber,
                         @RequestBody WithdrawalTransaction transaction) throws InsufficientBalanceException {
@@ -93,6 +95,7 @@ public class AccountController {
 
         Account account = AccountAPIMapper.toDomain(accountAPIRequestDTO);
         account.setAccountNumber(generateAccountNumber());
+        account.setBalance(BigDecimal.ZERO);
         accountService.saveAccount(account);
 
         HttpHeaders headers = new HttpHeaders();
@@ -113,7 +116,6 @@ public class AccountController {
         return (int)((Math.random()*maximum) + minimum);
     }
 
-    //TODO: getTransactionsByUserAccountNumber in TransactionsController
     //TODO: write test cases for transactionController and another classes.
 
 }
