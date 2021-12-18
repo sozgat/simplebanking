@@ -45,7 +45,7 @@ class ControllerTests  {
         doReturn(account).when(service).findAccount( "17892");
         ResponseEntity<TransactionStatus> result = controller.credit( "17892", new DepositTransaction(1000.0));
         verify(service, times(1)).findAccount("17892");
-        assertEquals("OK", result.getBody().getSTATUS());
+        assertEquals("OK", result.getBody().getStatus());
     }
 
     @Test
@@ -58,8 +58,8 @@ class ControllerTests  {
         ResponseEntity<TransactionStatus> result = controller.credit( "17892", new DepositTransaction(1000.0));
         ResponseEntity<TransactionStatus> result2 = controller.debit( "17892", new WithdrawalTransaction(50.0));
         verify(service, times(2)).findAccount("17892");
-        assertEquals("OK", result.getBody().getSTATUS());
-        assertEquals("OK", result2.getBody().getSTATUS());
+        assertEquals("OK", result.getBody().getStatus());
+        assertEquals("OK", result2.getBody().getStatus());
         assertEquals(950.0, account.getBalance(),0.001);
     }
 
@@ -71,7 +71,7 @@ class ControllerTests  {
 
             doReturn(account).when(service).findAccount( "17892");
             ResponseEntity<TransactionStatus> result = controller.credit( "17892", new DepositTransaction(1000.0));
-            assertEquals("OK", result.getBody().getSTATUS());
+            assertEquals("OK", result.getBody().getStatus());
             assertEquals(1000.0, account.getBalance(),0.001);
             verify(service, times(1)).findAccount("17892");
 
