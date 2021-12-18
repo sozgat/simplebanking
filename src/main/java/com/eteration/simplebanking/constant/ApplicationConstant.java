@@ -1,10 +1,10 @@
 package com.eteration.simplebanking.constant;
 
-import javax.persistence.DiscriminatorColumn;
-
 public abstract class ApplicationConstant {
     private ApplicationConstant() {
     }
+
+    public static final String API_RESPONSE_STATUS_OK = "OK";
 
     // db constants
     public static final String TABLE_PREFIX = "sb_";

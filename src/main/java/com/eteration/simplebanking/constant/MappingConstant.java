@@ -16,5 +16,8 @@ public abstract class MappingConstant {
     public static final String NEW_ACCOUNT_POST = "/new";
 
 
+    private MappingConstant(){
+        throw new IllegalStateException("MappingConstant class");
+    }
 
 }

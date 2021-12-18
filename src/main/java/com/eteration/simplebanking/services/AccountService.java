@@ -5,8 +5,6 @@ import com.eteration.simplebanking.model.Account;
 import com.eteration.simplebanking.repository.AccountJPARepository;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -18,13 +16,15 @@ public class AccountService {
     }
 
     public Account findAccount(String accountNumber){
-        try {
             Optional<Account> result = accountJPARepository.findByAccountNumber(accountNumber);
-            Account account = result.get();
+            Account account;
+            if (result.isPresent()) {
+                account = result.get();
+            }
+            else {
+                throw new RuntimeException("Account not found! AccountNumber: " + accountNumber);
+            }
             return account;
-        } catch(NoSuchElementException e) {
-            throw new NoSuchElementException("Account not found! Message: " + e.getMessage());
-        }
     }
 
     public void saveAccount(Account account) {

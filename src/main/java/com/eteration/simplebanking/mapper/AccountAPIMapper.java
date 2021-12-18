@@ -21,4 +21,8 @@ public class AccountAPIMapper {
         account.setOwner(accountAPIRequestDTO.getOwner());
         return account;
     }
+
+    private AccountAPIMapper(){
+        throw new IllegalStateException("Mapper class");
+    }
 }

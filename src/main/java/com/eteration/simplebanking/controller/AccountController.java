@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static com.eteration.simplebanking.constant.ApplicationConstant.API_RESPONSE_STATUS_OK;
 import static com.eteration.simplebanking.constant.MappingConstant.*;
 
 
@@ -27,6 +28,9 @@ import static com.eteration.simplebanking.constant.MappingConstant.*;
 @RestController
 @RequestMapping(value = ACCOUNT_CONTROLLER_PATH)
 public class AccountController {
+
+    private static final String HEADER_NAME_CONTENT_TYPE = "Content-Type";
+    private static final String HEADER_VALUE_JSON = "application/json;"; // Compliant
 
     private AccountService accountService;
 
@@ -39,7 +43,7 @@ public class AccountController {
         Account account = accountService.findAccount(accountNumber);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;");
+        headers.add(HEADER_NAME_CONTENT_TYPE, HEADER_VALUE_JSON);
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValueAsString(account);
 
@@ -53,7 +57,7 @@ public class AccountController {
         String approvalCode = UUID.randomUUID().toString();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;");
+        headers.add(HEADER_NAME_CONTENT_TYPE, HEADER_VALUE_JSON);
 
         DepositTransaction depositTransaction = new DepositTransaction(transaction.getAmount());
         depositTransaction.setApprovalCode(approvalCode);
@@ -65,8 +69,9 @@ public class AccountController {
 
         TransactionStatus transactionStatus = new TransactionStatus();
         transactionStatus.setApprovalCode(approvalCode);
+        transactionStatus.setStatus(API_RESPONSE_STATUS_OK);
 
-        return new ResponseEntity<TransactionStatus>(transactionStatus, headers, HttpStatus.OK);
+        return new ResponseEntity<>(transactionStatus, headers, HttpStatus.OK);
 
     }
 
@@ -76,7 +81,7 @@ public class AccountController {
         Account account = accountService.findAccount(accountNumber);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;");
+        headers.add(HEADER_NAME_CONTENT_TYPE, HEADER_VALUE_JSON);
 
         WithdrawalTransaction withdrawalTransaction = new WithdrawalTransaction(transaction.getAmount());
 
@@ -86,8 +91,9 @@ public class AccountController {
 
         TransactionStatus transactionStatus = new TransactionStatus();
         transactionStatus.setApprovalCode(withdrawalTransaction.getApprovalCode());
+        transactionStatus.setStatus(API_RESPONSE_STATUS_OK);
 
-        return new ResponseEntity<TransactionStatus>(transactionStatus, headers, HttpStatus.OK);
+        return new ResponseEntity<>(transactionStatus, headers, HttpStatus.OK);
 	}
 
     @PostMapping(NEW_ACCOUNT_POST)
@@ -99,7 +105,7 @@ public class AccountController {
         accountService.saveAccount(account);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;");
+        headers.add(HEADER_NAME_CONTENT_TYPE, HEADER_VALUE_JSON);
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValueAsString(account);
 

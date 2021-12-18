@@ -10,6 +10,6 @@ public class CheckTransaction extends Transaction{
 
     @Override
     public void doTransaction(Account account) throws InsufficientBalanceException {
-
+        throw new UnsupportedOperationException();
     }
 }

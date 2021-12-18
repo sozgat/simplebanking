@@ -1,12 +1,9 @@
 package com.eteration.simplebanking.model;
 
-import lombok.Data;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
 
-import static com.eteration.simplebanking.constant.ApplicationConstant.*;
+import static com.eteration.simplebanking.constant.ApplicationConstant.DEPOSIT_DISCRIMINATOR_VALUE;
 
 
 @Entity

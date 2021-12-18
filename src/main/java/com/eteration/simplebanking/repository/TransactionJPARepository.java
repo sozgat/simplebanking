@@ -1,6 +1,6 @@
 package com.eteration.simplebanking.repository;
+
 import com.eteration.simplebanking.model.Transaction;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 

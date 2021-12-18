@@ -3,7 +3,6 @@ package com.eteration.simplebanking.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 

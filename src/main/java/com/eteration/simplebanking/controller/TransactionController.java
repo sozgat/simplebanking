@@ -1,16 +1,17 @@
 package com.eteration.simplebanking.controller;
 
-import com.eteration.simplebanking.model.*;
+import com.eteration.simplebanking.model.CheckTransaction;
 import com.eteration.simplebanking.services.TransactionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
-import static com.eteration.simplebanking.constant.MappingConstant.*;
+import static com.eteration.simplebanking.constant.MappingConstant.TRANSACTION_CONTROLLER_PATH;
 
 
 @Slf4j
@@ -26,12 +27,12 @@ public class TransactionController {
 
 
     @PostMapping
-    public ResponseEntity<String> credit(@RequestBody CheckTransaction checkTransaction) throws InsufficientBalanceException {
+    public ResponseEntity<String> checkTransaction(@RequestBody CheckTransaction checkTransaction){
         String transactionStatus = transactionService.checkTransaction(checkTransaction.getTransactionType(),checkTransaction.getTransactionApproveCode());
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json;");
 
-        return new ResponseEntity<String>(transactionStatus, headers, HttpStatus.OK);
+        return new ResponseEntity<>(transactionStatus, headers, HttpStatus.OK);
     }
 }
