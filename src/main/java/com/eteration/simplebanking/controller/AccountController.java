@@ -121,7 +121,4 @@ public class AccountController {
     public int randNumberBetween(int minimum, int maximum){
         return (int)((Math.random()*maximum) + minimum);
     }
-
-    //TODO: write test cases for transactionController and another classes.
-
 }
