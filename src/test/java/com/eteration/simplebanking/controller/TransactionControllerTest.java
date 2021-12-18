@@ -1,12 +1,6 @@
 package com.eteration.simplebanking.controller;
-import java.util.Date;
 
-import com.eteration.simplebanking.dto.account.AccountAPIRequestDTO;
-import com.eteration.simplebanking.dto.account.AccountAPIResponseDTO;
-import com.eteration.simplebanking.model.Account;
 import com.eteration.simplebanking.model.CheckTransaction;
-import com.eteration.simplebanking.model.DepositTransaction;
-import com.eteration.simplebanking.services.AccountService;
 import com.eteration.simplebanking.services.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,9 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @SpringBootTest
 @ContextConfiguration
