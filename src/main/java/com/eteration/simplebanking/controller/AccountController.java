@@ -1,5 +1,8 @@
 package com.eteration.simplebanking.controller;
 
+import com.eteration.simplebanking.dto.account.AccountAPIRequestDTO;
+import com.eteration.simplebanking.dto.account.AccountAPIResponseDTO;
+import com.eteration.simplebanking.mapper.AccountAPIMapper;
 import com.eteration.simplebanking.model.Account;
 import com.eteration.simplebanking.model.DepositTransaction;
 import com.eteration.simplebanking.model.InsufficientBalanceException;
@@ -13,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 import static com.eteration.simplebanking.constant.MappingConstant.*;
@@ -84,7 +88,31 @@ public class AccountController {
         return new ResponseEntity<TransactionStatus>(transactionStatus, headers, HttpStatus.OK);
 	}
 
-    //TODO: Save method
+    @PostMapping(NEW_ACCOUNT_POST)
+    public ResponseEntity<AccountAPIResponseDTO> saveAccount(@Valid @RequestBody AccountAPIRequestDTO accountAPIRequestDTO) throws JsonProcessingException {
+
+        Account account = AccountAPIMapper.toDomain(accountAPIRequestDTO);
+        account.setAccountNumber(generateAccountNumber());
+        accountService.saveAccount(account);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json;");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValueAsString(account);
+
+        AccountAPIResponseDTO accountAPIResponseDTO = AccountAPIMapper.fromDomain(account);
+
+        return (new ResponseEntity<>(accountAPIResponseDTO, headers, HttpStatus.OK));
+    }
+
+    public String generateAccountNumber(){
+        return randNumberBetween(100,999) + "-" + randNumberBetween(1000,999999);
+    }
+
+    public int randNumberBetween(int minimum, int maximum){
+        return (int)((Math.random()*maximum) + minimum);
+    }
+
     //TODO: getTransactionsByUserAccountNumber in TransactionsController
     //TODO: write test cases for transactionController and another classes.
 

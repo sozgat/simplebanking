@@ -42,7 +42,12 @@ public class Account{
     @Column(name = CREATE_DATE)
     private Date createDate;
 
-    protected Account() {
+    @PrePersist
+    public void setCdate() {
+        this.createDate = new Date();
+    }
+
+    public Account() {
     }
 
     public Account(String owner, String accountNumber) {

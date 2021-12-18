@@ -10,6 +10,8 @@ public abstract class MappingConstant {
 
     public static final String ACCOUNT_POST_CREDIT = "/credit";
     public static final String ACCOUNT_POST_DEBIT = "/debit";
+    public static final String NEW_ACCOUNT_POST = "/new";
+
 
 
 }
