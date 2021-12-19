@@ -2,8 +2,8 @@ package com.eteration.simplebanking.controller;
 
 import com.eteration.simplebanking.model.CheckTransaction;
 import com.eteration.simplebanking.services.TransactionService;
+import com.eteration.simplebanking.util.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,9 +31,6 @@ public class TransactionController {
         log.info("checkTransaction is runnig. Body: {}", checkTransaction);
         String transactionStatus = transactionService.checkTransaction(checkTransaction.getTransactionType(),checkTransaction.getTransactionApproveCode());
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json;");
-
-        return new ResponseEntity<>(transactionStatus, headers, HttpStatus.OK);
+        return new ResponseEntity<>(transactionStatus, HttpUtil.ContentTypeJson(), HttpStatus.OK);
     }
 }
