@@ -9,4 +9,4 @@ cd simplebanking
 docker-compose up --build
 ```
 
-You can access Swagger File via http://localhost:8080/swagger-ui.html
+You can access Swagger Docs via http://localhost:8080/swagger-ui.html
