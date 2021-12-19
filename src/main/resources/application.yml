@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8080
 
 spring:
   main:
@@ -7,9 +7,9 @@ spring:
   profiles:
     active: dev
   datasource:
-    username: "root"
-    url: "jdbc:postgresql://localhost:5432/simplebanking"
-    password: "root"
+    username: ${MYAPP_JDBC_USER}
+    url: ${MYAPP_JDBC_URL}
+    password: ${MYAPP_JDBC_PASS}
   jpa:
     properties:
       hibernate:

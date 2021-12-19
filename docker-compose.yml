@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  app:
+    container_name: simple-banking
+    image: simple-banking
+    build: ./
+    ports:
+      - "8080:8080"
+    links:
+      - app-db
+    environment:
+      - MYAPP_JDBC_URL=jdbc:postgresql://app-db:5432/simplebanking
+      - MYAPP_JDBC_USER=root
+      - MYAPP_JDBC_PASS=root
+  app-db:
+    image: postgres
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=simplebanking
