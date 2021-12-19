@@ -1,8 +1,5 @@
 package com.eteration.simplebanking.model;
 
-
-// This class is a place holder you can change the complete implementation
-
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 

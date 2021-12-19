@@ -2,10 +2,12 @@ package com.eteration.simplebanking.services;
 
 import com.eteration.simplebanking.model.Transaction;
 import com.eteration.simplebanking.repository.TransactionJPARepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class TransactionService {
 
@@ -22,6 +24,7 @@ public class TransactionService {
                 return "SUCCESS";
             }
             else {
+                log.error("Transaction not found!");
                 throw new RuntimeException("Transaction not found! Type: " + type + " | approvalCode: " + approvalCode);
             }
     }

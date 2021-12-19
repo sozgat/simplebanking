@@ -28,6 +28,7 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<String> checkTransaction(@RequestBody CheckTransaction checkTransaction){
+        log.info("checkTransaction is runnig. Body: {}", checkTransaction);
         String transactionStatus = transactionService.checkTransaction(checkTransaction.getTransactionType(),checkTransaction.getTransactionApproveCode());
 
         HttpHeaders headers = new HttpHeaders();

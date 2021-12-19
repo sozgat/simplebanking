@@ -40,6 +40,8 @@ public class AccountController {
 
     @GetMapping(value = "/{accountNumber}")
     public ResponseEntity<Account> getAccount(@PathVariable("accountNumber") String accountNumber) throws JsonProcessingException {
+        log.info("getAccount is runnig. Account Number: {}", accountNumber);
+
         Account account = accountService.findAccount(accountNumber);
 
         HttpHeaders headers = new HttpHeaders();
@@ -53,6 +55,8 @@ public class AccountController {
     @PostMapping( ACCOUNT_POST_CREDIT +"/{accountNumber}")
     public ResponseEntity<TransactionStatus> credit(@PathVariable("accountNumber") String accountNumber,
                                                     @RequestBody DepositTransaction transaction) throws InsufficientBalanceException {
+        log.info("credit is runnig. Account Number: {} - Body: {}", accountNumber, transaction);
+
         Account account = accountService.findAccount(accountNumber);
         String approvalCode = UUID.randomUUID().toString();
 
@@ -78,6 +82,8 @@ public class AccountController {
     @PostMapping( ACCOUNT_POST_DEBIT +"/{accountNumber}")
     public ResponseEntity<TransactionStatus> debit(@PathVariable("accountNumber") String accountNumber,
                         @RequestBody WithdrawalTransaction transaction) throws InsufficientBalanceException {
+        log.info("debit is runnig. Account Number: {} - Body: {}", accountNumber, transaction);
+
         Account account = accountService.findAccount(accountNumber);
 
         HttpHeaders headers = new HttpHeaders();
@@ -98,6 +104,7 @@ public class AccountController {
 
     @PostMapping(NEW_ACCOUNT_POST)
     public ResponseEntity<AccountAPIResponseDTO> saveAccount(@Valid @RequestBody AccountAPIRequestDTO accountAPIRequestDTO) throws JsonProcessingException {
+        log.info("saveAccount is runnig. Body: {}", accountAPIRequestDTO);
 
         Account account = AccountAPIMapper.toDomain(accountAPIRequestDTO);
         account.setAccountNumber(generateAccountNumber());
