@@ -22,7 +22,7 @@ public class AccountService {
             Account account;
             if (result.isPresent()) {
                 account = result.get();
-                log.info("Account found! Accont: {}", account);
+                log.info("Account found! AccontId: {}", account.getId());
             }
             else {
                 log.error("Account not found! AccountNumber: {}", accountNumber);
@@ -33,6 +33,6 @@ public class AccountService {
 
     public void saveAccount(Account account) {
         accountJPARepository.save(account);
-        log.info("Account saved! Account: {}", account);
+        log.info("Account saved! AccountId: {}", account.getId());
     }
 }
