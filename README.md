@@ -20,3 +20,12 @@ If you want to run test classes in your IDE, you have to remove below command in
 ```bash
 exclude '**/*'
 ```
+
+## Java project run args for IDE
+If you want to run project on your IDE, please add these environment variables.
+
+| ARG             | Description  | Example |
+|-------------------|----------|----------|
+| MYAPP_JDBC_USER  | Database username | root
+| MYAPP_JDBC_URL   | Database hostname   | jdbc:postgresql://localhost:5432/simplebanking
+| MYAPP_JDBC_PASS   | Database password  | root
