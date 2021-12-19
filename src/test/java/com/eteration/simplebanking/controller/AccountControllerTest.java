@@ -66,4 +66,12 @@ class AccountControllerTest {
         int toCheckValue = controller.randNumberBetween(1,3);
         assertThat(actual, hasItems(toCheckValue));
     }
+
+    @Test
+    void transactionStatus(){
+        TransactionStatus transactionStatus = controller.transactionStatus("f344bf99-fd4a-4d4a-8ce5-df09daee84a0");
+        assertEquals("f344bf99-fd4a-4d4a-8ce5-df09daee84a0", transactionStatus.getApprovalCode());
+        assertEquals("OK", transactionStatus.getStatus());
+    }
+
 }
