@@ -11,6 +11,14 @@ docker-compose up --build
 ```
 
 You can access Swagger Docs via http://localhost:8080/swagger-ui.html
+### Postman JSON File
+If you want to test API via Postman, follow below instructions:
+1. Open your postman and click Import Button.
+2. Change tab to Link in Import Panel.
+3. Paste link (https://www.getpostman.com/collections/7833a663de4b0cf86c71) to URL field.
+4. Continue and Import. All is done :)
+
+![alt text](https://www.kampuskod.com/wp-content/uploads/2021/12/Screen-Shot-2021-12-20-at-03.06.40.png)
 
 ## Results of Test Cases - Test Coverage
 
