@@ -10,7 +10,6 @@ import com.eteration.simplebanking.model.WithdrawalTransaction;
 import com.eteration.simplebanking.services.AccountService;
 import com.eteration.simplebanking.util.HttpUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +38,6 @@ public class AccountController {
         log.info("getAccount is runnig. Account Number: {}", accountNumber);
 
         Account account = accountService.findAccount(accountNumber);
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValueAsString(account);
 
         return (new ResponseEntity<>(account, HttpUtil.ContentTypeJson(), HttpStatus.OK));
     }
@@ -86,9 +82,6 @@ public class AccountController {
         account.setAccountNumber(generateAccountNumber());
         account.setBalance(BigDecimal.ZERO);
         accountService.saveAccount(account);
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValueAsString(account);
 
         AccountAPIResponseDTO accountAPIResponseDTO = AccountAPIMapper.fromDomain(account);
 
