@@ -1,4 +1,5 @@
 # Simple Banking
+[![Java CI with Gradle](https://github.com/sozgat/simplebanking/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/sozgat/simplebanking/actions/workflows/gradle.yml)
 
 ## Installation Guide
 Simple Bank Application can run on Docker easily. Please follow below commands on your terminal.
